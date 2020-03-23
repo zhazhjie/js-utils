@@ -1,5 +1,5 @@
 {
   "name": "js-utils",
   "version": "1.0.0",
-  "main": "./src/util.js"
+  "main": "util.js"
 }
