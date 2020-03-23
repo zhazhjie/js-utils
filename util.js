@@ -69,6 +69,15 @@ export function toTreeData(list, parentId = 0, idKey = "id", parentIdKey = "pare
   return treeList;
 }
 
+/**
+ * 查找子节点
+ * @param parent
+ * @param list
+ * @param idKey
+ * @param parentIdKey
+ * @param level
+ * @returns {*}
+ */
 function findChildren(parent, list, idKey, parentIdKey, level) {
   parent._level = level;
   level++;
@@ -81,6 +90,49 @@ function findChildren(parent, list, idKey, parentIdKey, level) {
     }
   });
   return parent;
+}
+
+/**
+ * 树形数据转换
+ * @param {*} data
+ * @param {*} id
+ * @param {*} pid
+ */
+export function treeDataTranslate(data, id = 'id', pid = 'parentId') {
+  let res = [];
+  let temp = {};
+  for (let i = 0; i < data.length; i++) {
+    temp[data[i][id]] = data[i]
+  }
+  for (let k = 0; k < data.length; k++) {
+    if (temp[data[k][pid]] && data[k][id] !== data[k][pid]) {
+      if (!temp[data[k][pid]]['children']) {
+        temp[data[k][pid]]['children'] = []
+      }
+      if (!temp[data[k][pid]]['_level']) {
+        temp[data[k][pid]]['_level'] = 1
+      }
+      data[k]['_level'] = temp[data[k][pid]]._level + 1;
+      temp[data[k][pid]]['children'].push(data[k])
+    } else {
+      res.push(data[k])
+    }
+  }
+  return res;
+}
+
+/**
+ * list转map
+ * @param list
+ * @param key
+ * @returns {*}
+ */
+export function listToMap(list, key = "id") {
+  let map = {};
+  list.forEach(item => {
+    map[item[key]] = item;
+  });
+  return map;
 }
 
 /**
