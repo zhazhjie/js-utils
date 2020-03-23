@@ -1,5 +1,5 @@
 {
-  "name": "fly-ui",
+  "name": "js-utils",
   "version": "0.1.0",
   "main": "./src/util.js"
 }
