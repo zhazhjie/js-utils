@@ -170,14 +170,6 @@ export function phoneValidate(phone) {
 }
 
 /**
- * 判断是否为IOS系统
- * @returns {Boolean}
- */
-export function isIOS() {
-  return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
-}
-
-/**
  * 获取cookie
  * @param name {String}
  * @returns {String}
@@ -384,6 +376,14 @@ export function formatPhone(value) {
 export function isWeiXin() {
   let ua = window.navigator.userAgent.toLowerCase();
   return /MicroMessenger/i.test(ua);
+}
+
+/**
+ * 判断是否为IOS系统
+ * @returns {Boolean}
+ */
+export function isIOS() {
+  return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
 }
 
 /**
