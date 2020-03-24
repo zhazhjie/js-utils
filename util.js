@@ -55,15 +55,15 @@ export function isEmpty(value) {
  * 列表转树形
  * @param list {Array}
  * @param parentId {Number|String}
- * @param idKey {String}
- * @param parentIdKey {String}
+ * @param key {String}
+ * @param parentKey {String}
  * @returns {Array}
  */
-export function toTreeData(list, parentId = 0, idKey = "id", parentIdKey = "parentId") {
+export function toTreeData(list, parentId = "0", key = "id", parentKey = "parentId") {
   let treeList = [];
-  list.forEach(el => {
-    if (el[parentIdKey] === parentId) {
-      treeList.push(findChildren(el, list, idKey, parentIdKey, 1));
+  list.forEach(item => {
+    if (item[parentKey] === parentId) {
+      treeList.push(findChildren(item, list, key, parentKey, 1));
     }
   });
   return treeList;
@@ -71,22 +71,22 @@ export function toTreeData(list, parentId = 0, idKey = "id", parentIdKey = "pare
 
 /**
  * 查找子节点
- * @param parent
- * @param list
- * @param idKey
- * @param parentIdKey
- * @param level
- * @returns {*}
+ * @param parent {Object}
+ * @param list {Array}
+ * @param key {String}
+ * @param parentKey {String}
+ * @param level {Number}
+ * @returns {Object}
  */
-function findChildren(parent, list, idKey, parentIdKey, level) {
+function findChildren(parent, list, key, parentKey, level) {
   parent._level = level;
   level++;
-  list.forEach((el) => {
-    if (parent[idKey] === el[parentIdKey]) {
+  list.forEach(item => {
+    if (parent[key] === item[parentKey]) {
       if (!parent.children) {
         parent.children = [];
       }
-      parent.children.push(findChildren(el, list, idKey, parentIdKey, level));
+      parent.children.push(findChildren(item, list, key, parentKey, level));
     }
   });
   return parent;
