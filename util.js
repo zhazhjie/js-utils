@@ -457,3 +457,16 @@ export function getSearchParams() {
   });
   return result;
 }
+
+/**
+ * 下载文件
+ * @param data
+ */
+export function download(data) {
+  let {dataUrl, file, fileName} = data;
+  if (dataUrl) file = dataURLtoFile(dataUrl, fileName);
+  let link = document.createElement("a");
+  link.download = fileName;
+  link.href = URL.createObjectURL(file);
+  link.click();
+}
