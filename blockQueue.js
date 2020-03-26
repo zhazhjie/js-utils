@@ -42,14 +42,14 @@ export class BlockQueue {
     this.tasks.length && this.tasks.forEach(task => {
       task(this.results);
     });
-    this._clear();
+    this.clear();
   }
 
   _equals() {
     return this.index === this.length;
   }
 
-  _clear() {
+  clear() {
     this.index = 0;
     this.tasks = [];
     this.results = [];
