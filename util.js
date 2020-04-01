@@ -146,6 +146,17 @@ export function phoneValidate(phone) {
 }
 
 /**
+ * 验证邮箱
+ * @param email {String}
+ * @returns {Boolean}
+ */
+export function emailValidate (email) {
+  // 邮箱验证正则
+  let reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
+  return reg.test(email);
+}
+
+/**
  * 获取cookie
  * @param name {String}
  * @returns {String}
