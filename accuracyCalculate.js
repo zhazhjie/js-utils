@@ -51,7 +51,7 @@ Number.prototype.subtract = function (...args) {
 /**
  * 乘法，同上
  * @param args
- * @returns {any | number}
+ * @returns {number}
  */
 Number.prototype.multiply = function (...args) {
   let allArgs = [this.valueOf(), ...args];
@@ -64,7 +64,7 @@ Number.prototype.multiply = function (...args) {
 /**
  * 除法，同上
  * @param args
- * @returns {any}
+ * @returns {number}
  */
 Number.prototype.divide = function (...args) {
   let allArgs = [this.valueOf(), ...args];
@@ -119,6 +119,7 @@ function rounding(num, fractionDigits, down) {
  * 格式化数值
  * @param fractionDigits 保留小数位
  * @param roundingMode 取整模式：0四舍五入，1向上取整，2向下取整
+ * @returns {string}
  */
 Number.prototype.setScale = function (fractionDigits = 2, roundingMode = 0) {
   let num = this.valueOf();
