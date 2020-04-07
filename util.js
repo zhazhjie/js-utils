@@ -150,7 +150,7 @@ export function phoneValidate(phone) {
  * @param email {String}
  * @returns {Boolean}
  */
-export function emailValidate (email) {
+export function emailValidate(email) {
   // 邮箱验证正则
   let reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
   return reg.test(email);
@@ -225,8 +225,19 @@ export function fileToDataURL(file) {
 }
 
 /**
+ * @typedef {Object} CompressData
+ * @property {File} file
+ * @property {String} imgData
+ * @property {String} fileName
+ * @property {String} fileType
+ * @property {'file'|'base64'} exportType
+ * @property {Number} maxWidth
+ * @property {Number} maxHeight
+ */
+
+/**
  * 压缩
- * @param data
+ * @param data {CompressData}
  * @param resolve
  * @param reject
  */
@@ -278,11 +289,10 @@ function doCompress(data, resolve, reject) {
 
 /**
  * 压缩图片
- * @param data {Object}
- * data {[file:File | imgData:String], exportType:String[file | base64], maxWidth:Number, maxHeight:Number}
+ * @param data {CompressData}
  */
 export function compressImg(data) {
-  let {file} = data;
+  let {file, imgData} = data;
   return new Promise((resolve, reject) => {
     if (file) {
       fileToDataURL(file).then(imgData => {
@@ -292,7 +302,7 @@ export function compressImg(data) {
         doCompress(data, resolve, reject);
       }).catch(error => reject(error));
     } else {
-      data.fileType = data.split(/[:;]/)[1];
+      data.fileType = imgData.split(/[:;]/)[1];
       doCompress(data, resolve, reject);
     }
   });
@@ -331,7 +341,7 @@ export function throttle(callback, delay) {
 }
 
 /**
- * 格式化金额（截断2位小数）
+ * 格式化金额（默认截断2位小数）
  * @param value {Number|String}
  * @param roundingMode {Number}
  * @param fractionDigits {Number}
@@ -394,7 +404,7 @@ export function copyText(text) {
 }
 
 /**
- *
+ * 简单复制
  * @param data {Object}
  * @returns {Object}
  */
@@ -430,8 +440,9 @@ export function jsonp(url, params = {}, timeout = 10000) {
 
 /**
  * 获取url参数
+ * @param [key] {String}
  */
-export function getSearchParams() {
+export function getSearchParams(key) {
   let href = location.href;
   let index = href.indexOf("?");
   let result = {};
@@ -442,12 +453,16 @@ export function getSearchParams() {
     let val = item.split("=");
     result[val[0]] = val[1];
   });
-  return result;
+  return key === void 0 ? result : result[key];
 }
 
 /**
  * 下载文件
- * @param data
+ * @typedef {Object} DownloadData
+ * @property {String} [dataUrl]
+ * @property {File} [file]
+ * @property {String} [fileName]
+ * @param {DownloadData} data
  */
 export function download(data) {
   let {dataUrl, file, fileName} = data;
