@@ -226,13 +226,13 @@ export function fileToDataURL(file) {
 
 /**
  * @typedef {Object} CompressData
- * @property {File} file
- * @property {String} imgData
- * @property {String} fileName
- * @property {String} fileType
- * @property {'file'|'base64'} exportType
- * @property {Number} maxWidth
- * @property {Number} maxHeight
+ * @property {File} [file]
+ * @property {String} [imgData]
+ * @property {String} [fileName]
+ * @property {String} [fileType]
+ * @property {'file'|'base64'} [exportType]
+ * @property {Number} [maxWidth]
+ * @property {Number} [maxHeight]
  */
 
 /**
