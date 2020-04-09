@@ -30,9 +30,9 @@ export function importExcel(file) {
  * @param json {Array}
  * @param header {Object}
  * @param name {String}
- * @param type {'xlsx'|'xls'}
+ * @param type {String}
  */
-export function exportExcel(json, header, name = '表格', type = 'xls') {
+export function exportExcel(json, header, name = '表格', type = 'xlsx') {
   json.unshift(header);
   let keyMap = []; //获取keys
   for (let k in header) {
