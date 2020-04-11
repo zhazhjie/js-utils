@@ -4,15 +4,14 @@
  * @version: 1.0
  */
 import {aliPay} from "./aliPay";
-import {getCookie, isWeiXin} from "../util";
+import {isWeiXin} from "../util";
 import {wxMpPay} from "./wxMpPay";
 import {wxH5Pay} from "./wxH5Pay";
-import Vue from "vue";
 
 /**
  * payType：支付方式, orderNo：订单号, unifiedOrder：预下单api，path：支付完成页面跳转地址
  * @param data
- * @returns {Promise<any>}
+ * @returns {Promise<*>}
  */
 export function payRoute(data) {
   let {payType, orderNo, aliPayUrl, path, prepay} = data;
@@ -27,7 +26,5 @@ export function payRoute(data) {
           wxH5Pay(prepay, resolve, reject, path);
         }
       });
-    default:
-      Vue.prototype.$msg.warning("没用可用的支付方式");
   }
 }
