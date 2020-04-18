@@ -20,7 +20,7 @@ export function wxMpPay(prepay, resolve, reject) {
       if (res.err_msg === "get_brand_wcpay_request:ok") {
         resolve(res);
       } else if (res.err_msg === "get_brand_wcpay_request:cancel") {
-        // reject(res);
+        reject(res);
       } else {
         reject(res);
       }
