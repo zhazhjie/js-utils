@@ -63,53 +63,46 @@
   }
 
   function showImg(e) {
-    if (el.originalImg === this) {
+    createEl(this);
+    var img = el.img;
+    var wrapper = el.wrapper;
+    img.onload = function () {
       toggleBodyOverflow(false);
-      toggleWrapper(true, function () {
-        setImgSize(el.img, targetSize);
-      })
-    } else {
-      createEl(this);
-      var img = el.img;
-      var wrapper = el.wrapper;
-      img.onload = function () {
-        toggleBodyOverflow(false);
-        var margin = 30;
-        var imgWidth = img.naturalWidth || img.offsetWidth;
-        var imgHeight = img.naturalHeight || img.offsetHeight;
-        var imgRatio = imgWidth / imgHeight;
-        var winWidth = window.innerWidth - margin;
-        var winHeight = window.innerHeight - margin;
-        // var winRatio = winWidth / winHeight;
-        if (imgWidth > winWidth) {
-          imgWidth = winWidth;
-          imgHeight = imgWidth / imgRatio;
-        }
-        // else if (imgWidth > winWidth && imgRatio < winRatio) {
-        //   imgHeight = winHeight;
-        //   imgWidth = imgHeight * imgRatio;
-        // }
-        // if (imgHeight > winHeight) {
-        //   imgHeight = winHeight;
-        //   imgWidth = imgHeight * imgRatio;
-        // }
-        var top = margin >> 1;
-        var left = ((winWidth - imgWidth) >> 1) + top;
-        if (imgHeight <= winHeight) {
-          top = ((winHeight - imgHeight) >> 1) + top;
-        } else {
-          imgWidth -= wrapper.offsetWidth - wrapper.clientWidth;
-        }
-        targetSize = {
-          width: imgWidth,
-          height: imgHeight,
-          top: top,
-          left: left
-        };
-        toggleWrapper(true, function () {
-          setImgSize(img, targetSize);
-        });
+      var margin = 30;
+      var imgWidth = img.naturalWidth || img.offsetWidth;
+      var imgHeight = img.naturalHeight || img.offsetHeight;
+      var imgRatio = imgWidth / imgHeight;
+      var winWidth = window.innerWidth - margin;
+      var winHeight = window.innerHeight - margin;
+      // var winRatio = winWidth / winHeight;
+      if (imgWidth > winWidth) {
+        imgWidth = winWidth;
+        imgHeight = imgWidth / imgRatio;
+      }
+      // else if (imgWidth > winWidth && imgRatio < winRatio) {
+      //   imgHeight = winHeight;
+      //   imgWidth = imgHeight * imgRatio;
+      // }
+      // if (imgHeight > winHeight) {
+      //   imgHeight = winHeight;
+      //   imgWidth = imgHeight * imgRatio;
+      // }
+      var top = margin >> 1;
+      var left = ((winWidth - imgWidth) >> 1) + top;
+      if (imgHeight <= winHeight) {
+        top = ((winHeight - imgHeight) >> 1) + top;
+      } else {
+        imgWidth -= wrapper.offsetWidth - wrapper.clientWidth;
+      }
+      targetSize = {
+        width: imgWidth,
+        height: imgHeight,
+        top: top,
+        left: left
       };
+      toggleWrapper(true, function () {
+        setImgSize(img, targetSize);
+      });
     }
   }
 
