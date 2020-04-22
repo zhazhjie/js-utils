@@ -43,6 +43,8 @@ export function getStore(key, local = false) {
 }
 
 /**
+ * @deprecated
+ * @see Validate
  * 判空
  * @param value {Object}
  * @returns {boolean}
@@ -136,6 +138,8 @@ export function listToMap(list, key = "id") {
 }
 
 /**
+ * @deprecated
+ * @see Validate
  * 验证手机号
  * @param phone {Number|String}
  * @returns {Boolean}
@@ -146,6 +150,8 @@ export function phoneValidate(phone) {
 }
 
 /**
+ * @deprecated
+ * @see Validate
  * 验证邮箱
  * @param email {String}
  * @returns {Boolean}
