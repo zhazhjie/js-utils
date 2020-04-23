@@ -347,6 +347,8 @@ export function throttle(callback, delay) {
 }
 
 /**
+ * @deprecated
+ * @see Formatter
  * 格式化金额（默认截断2位小数）
  * @param value {Number|String}
  * @param roundingMode {Number}
@@ -363,6 +365,8 @@ export function formatAmount(value, roundingMode = 2, fractionDigits = 2) {
 }
 
 /**
+ * @deprecated
+ * @see Formatter
  * 格式化手机号
  * @param value {String|Number}
  * @returns {String}
@@ -373,6 +377,8 @@ export function formatPhone(value) {
 }
 
 /**
+ * @deprecated
+ * @see Validate
  * 判断是否为微信浏览器
  * @returns {Boolean}
  */
@@ -382,6 +388,8 @@ export function isWeiXin() {
 }
 
 /**
+ * @deprecated
+ * @see Validate
  * 判断是否为IOS系统
  * @returns {Boolean}
  */

@@ -11,8 +11,7 @@ export class Validate {
    * @return {boolean}
    */
   static isPhone(phone) {
-    let reg = /^1[23456789]\d{9}$/;
-    return reg.test(phone);
+    return /^1[23456789]\d{9}$/.test(phone);
   }
 
   /**
@@ -21,8 +20,7 @@ export class Validate {
    * @return {boolean}
    */
   static isEmail(email) {
-    let reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
-    return reg.test(email);
+    return /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/.test(email);
   }
 
   /**
@@ -41,5 +39,21 @@ export class Validate {
    */
   static isObject(value) {
     return Object.prototype.toString.call(value) === "[object Object]";
+  }
+
+  /**
+   * 判断是否为微信浏览器
+   * @returns {Boolean}
+   */
+  static isWeiXin() {
+    return /MicroMessenger/i.test(navigator.userAgent);
+  }
+
+  /**
+   * 判断是否为IOS系统
+   * @returns {Boolean}
+   */
+  static isIOS() {
+    return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
   }
 }
