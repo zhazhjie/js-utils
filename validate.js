@@ -24,12 +24,40 @@ export class Validate {
   }
 
   /**
-   * 判空
+   * 判断空值
    * @param value {*}
    * @return {boolean}
    */
   static isEmpty(value) {
     return value === null || value === undefined || value === "";
+  }
+
+  /**
+   * 判断空数组
+   * @param value {*}
+   * @return {boolean}
+   */
+  static isEmptyArray(value) {
+    let isAry = Array.isArray(value);
+    if (isAry) {
+      return !value.length;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * 判断空对象
+   * @param value {*}
+   * @return {boolean}
+   */
+  static isEmptyObject(value) {
+    let isObj = this.isObject(value);
+    if (isObj) {
+      return !Object.keys(value).length;
+    } else {
+      return true;
+    }
   }
 
   /**
