@@ -84,4 +84,13 @@ export class Validate {
   static isIOS() {
     return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
   }
+
+  /**
+   * 判断身份证
+   * @param idCardNo {string}
+   * @return {boolean}
+   */
+  static isIdCard(idCardNo) {
+    return /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(idCardNo);
+  }
 }
