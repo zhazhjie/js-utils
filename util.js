@@ -199,7 +199,7 @@ export function setCookie(name, value, exTime, domain = null, path = null) {
  * @returns {File}
  */
 export function dataURLtoFile(dataURL, fileName) {
-  let type = dataURL.split(';')[0].split('/')[1];
+  let type = dataURL.split(/[:;]/)[1];
   let byteString = atob(dataURL.split(',')[1]);
   let ab = new ArrayBuffer(byteString.length);
   let ia = new Uint8Array(ab);
