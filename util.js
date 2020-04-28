@@ -459,15 +459,16 @@ export function jsonp(url, params = {}, timeout = 10000) {
 export function getSearchParams(key) {
   let href = location.href;
   let index = href.indexOf("?");
-  let result = {};
-  if (index === -1) return result;
+  let results = {};
+  let value = key === void 0 ? results : results[key];
+  if (index === -1) return value;
   let search = href.substring(index + 1);
   let searchAry = search.split("&");
   searchAry.forEach(item => {
     let val = item.split("=");
-    result[val[0]] = val[1];
+    results[val[0]] = val[1];
   });
-  return key === void 0 ? result : result[key];
+  return value;
 }
 
 /**
