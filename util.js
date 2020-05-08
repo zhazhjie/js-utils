@@ -466,7 +466,7 @@ export function getSearchParams(key) {
   let searchAry = search.split("&");
   searchAry.forEach(item => {
     let val = item.split("=");
-    results[val[0]] = val[1];
+    results[val[0]] = decodeURIComponent(val[1]);
   });
   return value;
 }
