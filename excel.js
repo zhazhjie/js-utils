@@ -64,7 +64,12 @@ export function exportExcel(json, header, name = '表格', type = 'xlsx') {
   ))], {
     type: ""
   }); //创建二进制对象写入转换好的字节流
-  let href = URL.createObjectURL(tmpDown); //创建对象超链接
+  let href;
+  if (navigator.msSaveBlob) {
+    href = navigator.msSaveBlob(tmpDown, name + '.' + type);
+  } else {
+    href = URL.createObjectURL(tmpDown); //创建对象超链接
+  }
   let link = document.createElement("a");
   link.href = href; //绑定a标签
   link.download = name + '.' + type; //绑定a标签
