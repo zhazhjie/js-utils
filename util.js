@@ -430,23 +430,25 @@ export function copy(data) {
  * jsonp
  * @param url {String}
  * @param params {Object}
+ * @param jsonpCallback {String}
  * @param timeout {Number}
  * @returns {Promise<*>}
  */
-export function jsonp(url, params = {}, timeout = 10000) {
+export function jsonp(url, params = {}, jsonpCallback = "callback", timeout = 10000) {
   let keys = Object.keys(params);
-  let form = keys.map(key => key + "=" + params[key]).join("&");
+  let form = keys.map(key => key + "=" + encodeURIComponent(params[key])).join("&");
   let head = document.querySelector("head");
   let script = document.createElement("script");
   return new Promise((resolve, reject) => {
-    window[params.callback || "callback"] = (result) => {
+    window[jsonpCallback] = (result) => {
+      if (head.contains(script)) head.removeChild(script);
       resolve(result);
-      head.removeChild(script);
     };
     script.type = "text/javascript";
     script.src = `${url}${form ? "?" + form : ""}`;
     head.appendChild(script);
     setTimeout(() => {
+      if (head.contains(script)) head.removeChild(script);
       reject();
     }, timeout);
   })
