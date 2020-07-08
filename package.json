@@ -1,5 +1,8 @@
 {
   "name": "js-utils",
   "version": "1.0.23",
-  "main": "util.js"
+  "main": "util.js",
+  "_from": "js-utils@git+http://git.tigoyun.com/zzhijie/js-utils.git",
+  "_resolved": "http://git.tigoyun.com/zzhijie/js-utils.git#d4a17852c33bf6c85352c4afb6a341137b75a8a3",
+  "__npminstall_done": "Wed Jul 08 2020 13:55:02 GMT+0800 (中国标准时间)"
 }
