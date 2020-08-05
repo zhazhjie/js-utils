@@ -3,6 +3,6 @@
   "version": "1.0.24",
   "main": "util.js",
   "_from": "js-utils@git+http://git.tigoyun.com/zzhijie/js-utils.git",
-  "_resolved": "http://git.tigoyun.com/zzhijie/js-utils.git#d4a17852c33bf6c85352c4afb6a341137b75a8a3",
-  "__npminstall_done": "Wed Jul 08 2020 13:55:02 GMT+0800 (中国标准时间)"
+  "_resolved": "http://git.tigoyun.com/zzhijie/js-utils.git#debed366efdd075d2e0f7f95152c8a8bca28f160",
+  "__npminstall_done": "Mon Jul 27 2020 11:45:21 GMT+0800 (中国标准时间)"
 }
