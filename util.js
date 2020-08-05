@@ -468,15 +468,14 @@ export function getSearchParams(key) {
   let href = location.href;
   let index = href.indexOf("?");
   let results = {};
-  let value = key === void 0 ? results : results[key];
-  if (index === -1) return value;
+  if (index === -1) return key === void 0 ? results : null;
   let search = href.substring(index + 1);
   let searchAry = search.split("&");
   searchAry.forEach(item => {
     let val = item.split("=");
     results[val[0]] = decodeURIComponent(val[1]);
   });
-  return value;
+  return key === void 0 ? results : results[key];
 }
 
 /**
