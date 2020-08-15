@@ -78,6 +78,14 @@ export class Validate {
   }
 
   /**
+   * 判断是否为支付宝浏览器
+   * @returns {Boolean}
+   */
+  static isAlipayClient() {
+    return /AlipayClient/i.test(navigator.userAgent);
+  }
+
+  /**
    * 判断是否为IOS系统
    * @returns {Boolean}
    */
