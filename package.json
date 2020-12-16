@@ -1,6 +1,6 @@
 {
   "name": "js-utils",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "main": "util.js",
   "_from": "js-utils@git+http://git.tigoyun.com/zzhijie/js-utils.git",
   "_resolved": "http://git.tigoyun.com/zzhijie/js-utils.git#debed366efdd075d2e0f7f95152c8a8bca28f160",

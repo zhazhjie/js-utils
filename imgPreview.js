@@ -11,8 +11,8 @@
 })(window, function () {
 
   var imgPreview = {};
-  var el = {};
-  var targetSize = {};
+  var elMap = {};
+  var naturalSize = {};
 
   function toggleBodyOverflow(showFlag) {
     document.body.style.overflow = showFlag ? "auto" : "hidden";
@@ -20,15 +20,15 @@
 
   function toggleWrapper(showFlag, cb) {
     if (showFlag) {
-      el.wrapper.style.display = 'block';
+      elMap.wrapper.style.display = 'block';
       setTimeout(function () {
-        el.wrapper.style.backgroundColor = 'rgba(0,0,0,0.3)';
+        elMap.wrapper.style.backgroundColor = 'rgba(0,0,0,0.3)';
         if (cb) cb();
       }, 10);
     } else {
-      el.wrapper.style.backgroundColor = 'rgba(0,0,0,0)';
+      elMap.wrapper.style.backgroundColor = 'rgba(0,0,0,0)';
       setTimeout(function () {
-        el.wrapper.style.display = 'none';
+        elMap.wrapper.style.display = 'none';
         if (cb) cb();
       }, 300);
     }
@@ -41,76 +41,67 @@
     img.style.left = size.left + 'px';
   }
 
-  function createEl(originalImg) {
-    el.originalImg = originalImg;
-    if (el.wrapper && el.img) {
-      setImgSize(el.img, originalImg.getBoundingClientRect());
-      el.img.src = originalImg.src;
-      return el;
+  function createPreviewEL(originalImg) {
+    elMap.originalImg = originalImg;
+    if (elMap.wrapper && elMap.img) {
+      if (elMap.img.src === originalImg.src) return;
+      setImgSize(elMap.img, originalImg.getBoundingClientRect());
+      elMap.img.src = originalImg.src;
+    } else {
+      var wrapper = document.createElement('div');
+      wrapper.style = 'width:100vw;height:100vh;position:fixed;top:0;left:0;z-index:9998;overflow-x:hidden;overflow-y:auto;backgroundColor:rgba(0, 0, 0, 0);transition:all .3s;';
+      var img = document.createElement('img');
+      img.src = originalImg.src;
+      img.style = 'cursor:zoom-out;position:absolute;transition:all .3s;margin-bottom:15px';
+      setImgSize(img, originalImg.getBoundingClientRect());
+      wrapper.appendChild(img);
+      document.body.appendChild(wrapper);
+      wrapper.addEventListener('click', hideImg);
+      elMap.wrapper = wrapper;
+      elMap.img = img;
     }
-    var wrapper = document.createElement('div');
-    wrapper.style = 'width:100vw;height:100vh;position:fixed;top:0;left:0;z-index:9998;overflow-x:hidden;overflow-y:auto;backgroundColor:rgba(0, 0, 0, 0);transition:all .3s;';
-    var img = document.createElement('img');
-    img.src = originalImg.src;
-    img.style = 'cursor:zoom-out;position:absolute;transition:all .3s;margin-bottom:15px';
-    setImgSize(img, originalImg.getBoundingClientRect());
-    wrapper.appendChild(img);
-    document.body.appendChild(wrapper);
-    wrapper.addEventListener('click', hideImg);
-    el.wrapper = wrapper;
-    el.img = img;
-    return el;
   }
 
   function showImg(e) {
-    createEl(this);
-    var img = el.img;
-    var wrapper = el.wrapper;
-    img.onload = function () {
-      toggleBodyOverflow(false);
-      var margin = 30;
-      var imgWidth = img.naturalWidth || img.offsetWidth;
-      var imgHeight = img.naturalHeight || img.offsetHeight;
-      var imgRatio = imgWidth / imgHeight;
-      var winWidth = window.innerWidth - margin;
-      var winHeight = window.innerHeight - margin;
-      // var winRatio = winWidth / winHeight;
-      if (imgWidth > winWidth) {
-        imgWidth = winWidth;
-        imgHeight = imgWidth / imgRatio;
-      }
-      // else if (imgWidth > winWidth && imgRatio < winRatio) {
-      //   imgHeight = winHeight;
-      //   imgWidth = imgHeight * imgRatio;
-      // }
-      // if (imgHeight > winHeight) {
-      //   imgHeight = winHeight;
-      //   imgWidth = imgHeight * imgRatio;
-      // }
-      var top = margin >> 1;
-      var left = ((winWidth - imgWidth) >> 1) + top;
-      if (imgHeight <= winHeight) {
-        top = ((winHeight - imgHeight) >> 1) + top;
-      } else {
-        imgWidth -= wrapper.offsetWidth - wrapper.clientWidth;
-      }
-      targetSize = {
-        width: imgWidth,
-        height: imgHeight,
-        top: top,
-        left: left
-      };
-      toggleWrapper(true, function () {
-        setImgSize(img, targetSize);
-      });
-    }
+    loadNaturalSize(this);
+    createPreviewEL(this);
+    toggleBodyOverflow(false);
+    toggleWrapper(true, function () {
+      setImgSize(elMap.img, naturalSize);
+    });
   }
 
   function hideImg() {
-    if (!el.img || !el.originalImg) return;
-    setImgSize(el.img, el.originalImg.getBoundingClientRect());
+    if (!elMap.img || !elMap.originalImg) return;
+    setImgSize(elMap.img, elMap.originalImg.getBoundingClientRect());
     toggleWrapper(false);
     toggleBodyOverflow(true);
+  }
+
+  function loadNaturalSize(img) {
+    var margin = 30;
+    var imgWidth = img.naturalWidth || img.offsetWidth;
+    var imgHeight = img.naturalHeight || img.offsetHeight;
+    var imgRatio = imgWidth / imgHeight;
+    var winWidth = window.innerWidth - margin;
+    var winHeight = window.innerHeight - margin;
+    if (imgWidth > winWidth) {
+      imgWidth = winWidth;
+      imgHeight = imgWidth / imgRatio;
+    }
+    var top = margin >> 1;
+    var left = ((winWidth - imgWidth) >> 1) + top;
+    if (imgHeight <= winHeight) {
+      top = ((winHeight - imgHeight) >> 1) + top;
+    } else {
+      imgWidth -= wrapper.offsetWidth - wrapper.clientWidth;
+    }
+    naturalSize = {
+      width: imgWidth,
+      height: imgHeight,
+      top: top,
+      left: left
+    };
   }
 
   imgPreview.install = function (Vue) {
