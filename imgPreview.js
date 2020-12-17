@@ -63,8 +63,8 @@
   }
 
   function showImg(e) {
-    loadNaturalSize(this);
     createPreviewEL(this);
+    loadNaturalSize(this);
     toggleBodyOverflow(false);
     toggleWrapper(true, function () {
       setImgSize(elMap.img, naturalSize);
@@ -85,6 +85,7 @@
     var imgRatio = imgWidth / imgHeight;
     var winWidth = window.innerWidth - margin;
     var winHeight = window.innerHeight - margin;
+    var wrapper = elMap.wrapper;
     if (imgWidth > winWidth) {
       imgWidth = winWidth;
       imgHeight = imgWidth / imgRatio;
