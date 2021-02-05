@@ -5,9 +5,6 @@
  * @version: 1.0
  */
 
-import {BlockQueue} from "./blockQueue";
-
-let blockQueue = new BlockQueue(1);
 export function setStore(key, value, local = false) {
   if (local) {
     if (isEmpty(value)) {

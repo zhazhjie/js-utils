@@ -8,7 +8,7 @@
  */
 
 export class BinarySearchTree<T> {
-    constructor(array: Array<T>, key: string);
+    constructor(array?: Array<T>, key?: string);
 
     /**
      * 插入节点
