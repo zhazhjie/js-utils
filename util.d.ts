@@ -220,3 +220,17 @@ export function getSearchParams(key?: string): any;
  * @param {*} data
  */
 export function download(data: any);
+
+
+/**
+ * 遍历对象
+ * @param obj
+ * @param cb
+ */
+export function forEach(obj:any, cb:Function):void;
+
+/**
+ * 深度拷贝/合并对象
+ * @returns {{}}
+ */
+export function deepMerge(...objs: any[]):any;

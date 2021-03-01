@@ -4,16 +4,17 @@
  * @date: 2018-11-05 14:20:38
  * @version: 1.0
  */
+import {Validate} from "./validate";
 
 export function setStore(key, value, local = false) {
   if (local) {
-    if (isEmpty(value)) {
+    if (Validate.isEmpty(value)) {
       localStorage.removeItem(key);
     } else {
       localStorage.setItem(key, JSON.stringify(value));
     }
   } else {
-    if (isEmpty(value)) {
+    if (Validate.isEmpty(value)) {
       sessionStorage.removeItem(key);
     } else {
       sessionStorage.setItem(key, JSON.stringify(value));
@@ -487,4 +488,59 @@ export function download(data) {
   link.download = fileName;
   link.href = URL.createObjectURL(file);
   link.click();
+}
+
+/**
+ * 遍历对象
+ * @param obj
+ * @param cb
+ */
+export function forEach(obj, cb) {
+  if (Validate.isEmpty(obj)) {
+    return;
+  }
+  if (typeof obj !== 'object') {
+    obj = [obj];
+  }
+  if (Validate.isArray(obj)) {
+    for (let i = 0, l = obj.length; i < l; i++) {
+      cb(obj[i], i);
+    }
+  } else {
+    for (let key in obj) {
+      cb(obj[key], key);
+    }
+  }
+}
+
+/**
+ * 深度拷贝/合并对象
+ * @returns {{}}
+ */
+export function deepMerge(...objs) {
+  let ary = [];
+
+  function merge(...objs) {
+    let result = {};
+
+    function assignValue(val, key) {
+      if (ary.includes(val)) return;
+      if (Validate.isObject(val)) {
+        result[key] = merge(Validate.isObject(result[key]) ? result[key] : null, val);
+        ary.push(val);
+      } else {
+        result[key] = val;
+      }
+    }
+
+    for (let i = 0, l = objs.length; i < l; i++) {
+      if (Validate.isObject(objs[i])) {
+        ary.push(objs[i]);
+      }
+      forEach(objs[i], assignValue);
+    }
+    return result;
+  }
+
+  return merge(...objs);
 }

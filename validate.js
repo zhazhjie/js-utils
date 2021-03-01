@@ -5,6 +5,8 @@
  * @version: 1.0
  */
 export class Validate {
+  static _toString = Object.prototype.toString;
+
   /**
    * 验证手机号
    * @param phone {String}
@@ -29,16 +31,27 @@ export class Validate {
    * @return {boolean}
    */
   static isEmpty(value) {
-    return value === null || value === undefined || value === "";
+    switch (true) {
+      case value === null || value === undefined || value === "":
+        return true;
+      case this.isArray(value):
+        return !(value || []).length;
+      case this.isObject(value):
+        return !Object.keys(value).length;
+      default:
+        return false;
+    }
   }
 
   /**
+   * @deprecated
+   * @see isEmpty
    * 判断空数组
    * @param value {*}
    * @return {boolean}
    */
   static isEmptyArray(value) {
-    let isAry = Array.isArray(value);
+    let isAry = this.isArray(value);
     if (isAry) {
       return !value.length;
     } else {
@@ -47,6 +60,8 @@ export class Validate {
   }
 
   /**
+   * @deprecated
+   * @see isEmpty
    * 判断空对象
    * @param value {*}
    * @return {boolean}
@@ -65,9 +80,9 @@ export class Validate {
    * @param value {*}
    * @return {boolean}
    */
-  static isObject(value) {
-    return Object.prototype.toString.call(value) === "[object Object]";
-  }
+  // static isObject(value) {
+  //   return this._toString.call(value) === "[object Object]";
+  // }
 
   /**
    * 判断是否为微信浏览器
@@ -101,4 +116,86 @@ export class Validate {
   static isIdCard(idCardNo) {
     return /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(idCardNo);
   }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  static isArray(val) {
+    return this._toString.call(val) === '[object Array]';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  isUndefined(val) {
+    return typeof val === 'undefined';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  static isString(val) {
+    return typeof val === 'string';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  static isNumber(val) {
+    return typeof val === 'number';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean|boolean}
+   */
+  static isObject(val) {
+    return val !== null && typeof val === 'object';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  static isDate(val) {
+    return this._toString.call(val) === '[object Date]';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  static isFile(val) {
+    return this._toString.call(val) === '[object File]';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  static isBlob(val) {
+    return this._toString.call(val) === '[object Blob]';
+  }
+
+  /**
+   *
+   * @param val
+   * @returns {boolean}
+   */
+  static isFunction(val) {
+    return this._toString.call(val) === '[object Function]';
+  }
+
 }

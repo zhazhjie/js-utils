@@ -45,7 +45,7 @@ export class Validate {
      * @param value {*}
      * @return {boolean}
      */
-    static isObject(value: any): boolean;
+    // static isObject(value: any): boolean;
 
     /**
      * 判断是否为微信浏览器
@@ -71,4 +71,67 @@ export class Validate {
      * @return {boolean}
      */
     static isIdCard(idCardNo: string): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    static isArray(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    isUndefined(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    static isString(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    static isNumber(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean|boolean}
+     */
+    static isObject(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    static isDate(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    static isFile(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    static isBlob(val: any): boolean;
+
+    /**
+     *
+     * @param val
+     * @returns {boolean}
+     */
+    static isFunction(val: any): boolean;
 }
