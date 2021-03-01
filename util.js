@@ -491,29 +491,6 @@ export function download(data) {
 }
 
 /**
- * 遍历对象
- * @param obj
- * @param cb
- */
-export function forEach(obj, cb) {
-  if (Validate.isEmpty(obj)) {
-    return;
-  }
-  if (typeof obj !== 'object') {
-    obj = [obj];
-  }
-  if (Validate.isArray(obj)) {
-    for (let i = 0, l = obj.length; i < l; i++) {
-      cb(obj[i], i);
-    }
-  } else {
-    for (let key in obj) {
-      cb(obj[key], key);
-    }
-  }
-}
-
-/**
  * 深度拷贝对象
  * @returns {{}}
  */
