@@ -514,33 +514,21 @@ export function forEach(obj, cb) {
 }
 
 /**
- * 深度拷贝/合并对象
+ * 深度拷贝对象
  * @returns {{}}
  */
-export function deepMerge(...objs) {
-  let ary = [];
-
-  function merge(...objs) {
-    let result = {};
-
-    function assignValue(val, key) {
-      if (ary.includes(val)) return;
-      if (Validate.isObject(val)) {
-        result[key] = merge(Validate.isObject(result[key]) ? result[key] : null, val);
-        ary.push(val);
-      } else {
-        result[key] = val;
+export function deepCopy(obj) {
+  let result;
+  if (Validate.isObject(obj)) {
+    result = new obj.constructor();
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        let val = obj[key];
+        result[key] = Validate.isObject(val) ? deepCopy(val) : val;
       }
     }
-
-    for (let i = 0, l = objs.length; i < l; i++) {
-      if (Validate.isObject(objs[i])) {
-        ary.push(objs[i]);
-      }
-      forEach(objs[i], assignValue);
-    }
-    return result;
+  } else {
+    result = obj;
   }
-
-  return merge(...objs);
+  return result;
 }
