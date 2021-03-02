@@ -500,8 +500,7 @@ export function deepCopy(obj) {
     result = new obj.constructor();
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        let val = obj[key];
-        result[key] = Validate.isObject(val) ? deepCopy(val) : val;
+        result[key] = deepCopy(obj[key]);
       }
     }
   } else {
