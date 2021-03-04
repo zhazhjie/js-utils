@@ -400,7 +400,7 @@ export function isIOS() {
 export function copyText(text) {
   let el = document.createElement("span");
   el.innerText = text;
-  el.style = "position:absolute;z-index:-1;opacity:0";
+  el.style = "position:absolute;z-index:-1;opacity:0;user-select: all;";
   document.body.appendChild(el);
   let range = document.createRange();
   range.selectNode(el);
