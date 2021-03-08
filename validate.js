@@ -4,8 +4,9 @@
  * @date: 2020-04-22 21:48:36
  * @version: 1.0
  */
+const _toString = Object.prototype.toString;
+
 export class Validate {
-  static _toString = Object.prototype.toString;
 
   /**
    * 验证手机号
@@ -81,7 +82,7 @@ export class Validate {
    * @return {boolean}
    */
   // static isObject(value) {
-  //   return this._toString.call(value) === "[object Object]";
+  //   return _toString.call(value) === "[object Object]";
   // }
 
   /**
@@ -123,7 +124,7 @@ export class Validate {
    * @returns {boolean}
    */
   static isArray(val) {
-    return this._toString.call(val) === '[object Array]';
+    return _toString.call(val) === '[object Array]';
   }
 
   /**
@@ -168,7 +169,7 @@ export class Validate {
    * @returns {boolean}
    */
   static isDate(val) {
-    return this._toString.call(val) === '[object Date]';
+    return _toString.call(val) === '[object Date]';
   }
 
   /**
@@ -177,7 +178,7 @@ export class Validate {
    * @returns {boolean}
    */
   static isFile(val) {
-    return this._toString.call(val) === '[object File]';
+    return _toString.call(val) === '[object File]';
   }
 
   /**
@@ -186,7 +187,7 @@ export class Validate {
    * @returns {boolean}
    */
   static isBlob(val) {
-    return this._toString.call(val) === '[object Blob]';
+    return _toString.call(val) === '[object Blob]';
   }
 
   /**
@@ -195,7 +196,7 @@ export class Validate {
    * @returns {boolean}
    */
   static isFunction(val) {
-    return this._toString.call(val) === '[object Function]';
+    return _toString.call(val) === '[object Function]';
   }
 
 }
