@@ -51,16 +51,30 @@ export function isEmpty(value) {
 /**
  * 列表转树形
  * @param list {Array}
- * @param parentId {Number|String}
+ * @param parentId {Number|String} @deprecated
  * @param key {String}
  * @param parentKey {String}
  * @returns {Array}
  */
 export function toTreeData(list, parentId = "0", key = "id", parentKey = "parentId") {
   let treeList = [];
+  let map = listToMap(list, key);
+  let getLevel = (item, level = 1) => {
+    let parent = map[item[parentKey]];
+    if (parent) {
+      return getLevel(parent, ++level);
+    }
+    return level;
+  }
   list.forEach(item => {
-    if (item[parentKey] === parentId) {
-      treeList.push(findChildren(item, list, key, parentKey, 1));
+    let parent = map[item[parentKey]];
+    if (!parent) {
+      item._level = 1;
+      treeList.push(item);
+    } else {
+      if (!parent.children) parent.children = [];
+      item._level = getLevel(item);
+      parent.children.push(item);
     }
   });
   return treeList;
