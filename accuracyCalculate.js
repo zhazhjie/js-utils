@@ -78,8 +78,25 @@ Number.prototype.divide = function (...args) {
       return decimalToInteger(total) * powerTen(diffDecimalLen) / decimalToInteger(cur);
     }
   });
+}
+/**
+ * 取余，同上
+ * @param args
+ * @returns {number}
+ */
+Number.prototype.mod = function (...args) {
+  let allArgs = [this.valueOf(), ...args];
+  return allArgs.reduce((total, cur) => {
+    let curDecimalLen = getDecimalLen(cur);
+    let totalDecimalLen = getDecimalLen(total);
+    let diffDecimalLen = Math.abs(totalDecimalLen - curDecimalLen);
+    if (totalDecimalLen > curDecimalLen) {
+      return decimalToInteger(total) % (decimalToInteger(cur) * powerTen(diffDecimalLen)) / powerTen(diffDecimalLen);
+    } else {
+      return decimalToInteger(total) * powerTen(diffDecimalLen) % decimalToInteger(cur) / powerTen(diffDecimalLen);
+    }
+  });
 };
-
 /**
  * 四舍五入，修复toFixed bug
  * @param fractionDigits
