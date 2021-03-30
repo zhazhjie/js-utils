@@ -91,9 +91,9 @@ Number.prototype.mod = function (...args) {
     let totalDecimalLen = getDecimalLen(total);
     let diffDecimalLen = Math.abs(totalDecimalLen - curDecimalLen);
     if (totalDecimalLen > curDecimalLen) {
-      return decimalToInteger(total) % (decimalToInteger(cur) * powerTen(diffDecimalLen)) / powerTen(diffDecimalLen);
+      return decimalToInteger(total) % (decimalToInteger(cur) * powerTen(diffDecimalLen)) / powerTen(totalDecimalLen);
     } else {
-      return decimalToInteger(total) * powerTen(diffDecimalLen) % decimalToInteger(cur) / powerTen(diffDecimalLen);
+      return decimalToInteger(total) * powerTen(diffDecimalLen) % decimalToInteger(cur) / powerTen(curDecimalLen);
     }
   });
 };
