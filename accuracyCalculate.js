@@ -40,7 +40,8 @@ Number.prototype.add = function (...args) {
   }, 0) / powerTen(maxDecimalLen);
 };
 /**
- * 减法，同上
+ * 减法：支持多个数相减
+ * 如：0.1.subtract(0.2,0.3)
  * @param args
  * @returns {number}
  */
@@ -49,7 +50,8 @@ Number.prototype.subtract = function (...args) {
   return this.add(...args);
 };
 /**
- * 乘法，同上
+ * 乘法：支持多个数相乘
+ * 如：0.1.multiply(0.2,0.3)
  * @param args
  * @returns {number}
  */
@@ -62,7 +64,8 @@ Number.prototype.multiply = function (...args) {
   });
 };
 /**
- * 除法，同上
+ * 除法：支持多个数相除
+ * 如：0.1.divide(0.2,0.3)
  * @param args
  * @returns {number}
  */
@@ -80,7 +83,8 @@ Number.prototype.divide = function (...args) {
   });
 }
 /**
- * 取余，同上
+ * 取余：支持多个数取余
+ * 如：0.1.mod(0.2,0.3)
  * @param args
  * @returns {number}
  */

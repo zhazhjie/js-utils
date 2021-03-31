@@ -35,6 +35,13 @@ declare interface Number {
      */
     divide: (...args: [number]) => number;
     /**
+     * 取余：支持多个数取余
+     * 如：0.1.mod(0.2,0.3)
+     * @param args
+     * @returns {number}
+     */
+    mod: (...args: [number]) => number;
+    /**
      * 四舍五入，修复toFixed bug
      * @param fractionDigits
      * @returns {string}
