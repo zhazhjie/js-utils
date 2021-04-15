@@ -129,7 +129,7 @@ function rounding(num, fractionDigits, down) {
   } else {
     let len = decimalLen - fractionDigits;
     let intVal = decimalToInteger(num);
-    let diff = powerTen(len) >> 1;
+    let diff = powerTen(len) / 2;
     intVal = down ? intVal - diff : intVal + diff;
     num = intVal / powerTen(decimalLen);
     return num.$toFixed(fractionDigits);
