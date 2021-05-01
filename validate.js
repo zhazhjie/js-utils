@@ -37,7 +37,7 @@ export class Validate {
         return true;
       case this.isArray(value):
         return !(value || []).length;
-      case this.isObject(value):
+      case this.isPlainObject(value):
         return !Object.keys(value).length;
       default:
         return false;
@@ -75,15 +75,6 @@ export class Validate {
       return true;
     }
   }
-
-  /**
-   * 是否为对象
-   * @param value {*}
-   * @return {boolean}
-   */
-  // static isObject(value) {
-  //   return _toString.call(value) === "[object Object]";
-  // }
 
   /**
    * 判断是否为微信浏览器
@@ -161,6 +152,15 @@ export class Validate {
    */
   static isObject(val) {
     return val !== null && typeof val === 'object';
+  }
+
+  /**
+   * 是否为平板对象
+   * @param value {*}
+   * @return {boolean}
+   */
+  static isPlainObject(value) {
+    return _toString.call(value) === "[object Object]";
   }
 
   /**
